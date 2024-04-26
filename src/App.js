@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import on from './images/ONbulb.jpg';
+import off from './images/OFFbulb.jpg';
 
-function App() {
+const Container = styled.div`
+  text-align: center;
+  margin-top: 14rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: ${props => (props.toggle ? 'green' : 'red')};
+`;
+
+// styling for the image
+const Image = styled.img`
+  width: 10rem
+  transition: all 0.5s ease-in-out;
+  height: 10rem;
+  object-fit: contain;
+`;
+
+const Button = styled.button`
+  position: relative;
+  top: -10rem;
+  background-color: ${props => (props.toggle ? 'green' : 'red')};
+  color: black;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+`;
+
+const App = () => {
+  const [toggle, setToggle] = useState(false);
+
+  const toggleButton = () => {
+    setToggle(!toggle);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Image src={toggle ? on : off} alt="" />
+      <Button onClick={toggleButton}>{toggle ? 'ON' : 'OFF'}</Button>
+    </Container>
   );
-}
+};
 
 export default App;
